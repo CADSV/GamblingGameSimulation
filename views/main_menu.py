@@ -1,12 +1,16 @@
 #Needed imports
 from views.utils import (
-    create_menu, #Para crear el menu
-    clear_screen, #Para limpiar la pantalla
-    exit_system, #Para salir del programa
-    )
+    create_menu, #To create the menu
+    clear_screen, #To clear the screen
+    exit_system, #To exit the system
+)
+
+from views.simulation_menu import simulation_menu #To call the simulation menu
 
 from exceptions.menu_exceptions import InexistentMenuOptionError #Exception of an inexistent menu option selected
 
+
+#Function use to create the main menu
 def main():
     context = {}
     selected_option = None
@@ -25,9 +29,7 @@ def main():
             selected_option = int(input('Por favor seleccione una opción: '))
 
             if (selected_option == 1):
-                # actions_menu(context)
-                print('\nHEEEY')
-                input()
+                simulation_menu(context)
 
             elif (selected_option == 2):
                 exit_system()
@@ -42,11 +44,3 @@ def main():
         except (InexistentMenuOptionError) as e:
             print(f'\n\n{e}\n')
             input('Por favor presione cualquier tecla para continuar...')
-
-
-
-
-    print('hola')
-
-
-    input()
