@@ -37,9 +37,9 @@ def simulation(context: dict, bonus: int) -> dict:
                 'victoria': (victory := rand < 0.5),
                 'nuevo_monto': (initialAmount := min(target, initialAmount + bet) if victory else max(initialAmount - bet, 0)),
             })
-            print(plays)
-            print('\n')
-            input()
+            # print(plays)
+            # print('\n')
+            # input()
 
             if(bonus):
                 consecutiveWins = consecutiveWins + 1 if victory else 0
@@ -63,9 +63,9 @@ def simulation(context: dict, bonus: int) -> dict:
         consecutiveWins = 0
         bet = initialBet
         initialAmount = amount
-        print(simulation)
-        print('\n\n')
-        input()
+        # print(simulation)
+        # print('\n\n')
+        # input()
         
     context['simulation'] = simulation
 
@@ -84,16 +84,10 @@ def calculations(context: dict, rounds: int, initialAmount: int, target: int) ->
     hope: float =  ( (target - initialAmount)*average - initialAmount * (1 - average) )
     print(f"\nLa ganancia esperada es de: {hope:.2g} u.m.")
 
-    # for index, simulation in enumerate(context['simulation']):
-    #     for play in simulation['jugadas']:
-    #         print(play)
-    #         input()
 
+    xlsx_file = export_excel(context['simulation'])
+    print(f'\nSe ha guardado la simulación en el excel ubicado en "{xlsx_file}"')
 
-    # xlsx_file = export_excel(context['simulation'])
-    # print(f'\nSe ha guardado la simulación en el excel ubicado en "{xlsx_file}"')
-
-    input()
 
 
     return context
@@ -103,8 +97,7 @@ def calculations(context: dict, rounds: int, initialAmount: int, target: int) ->
 
 def export_excel(resultados: list[dict]) -> str:
 
-    # filename = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.xlsx'
-    filename ='hola.xlsx'
+    filename = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}'
 
     dataset = []
     for index, simulation in enumerate(resultados):
@@ -121,9 +114,10 @@ def export_excel(resultados: list[dict]) -> str:
         '¿Se llegó a la meta?'
     ]
 
-    print(dataset)
-    input()
 
     df = pd.DataFrame(dataset, columns=cols)
-    df.to_excel(xlsx_file := f'{filename}', index=False)
+
+    df.to_excel(xlsx_file := f'{filename}.xlsx', index=False)
+
+
     return xlsx_file
