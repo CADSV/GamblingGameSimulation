@@ -10,7 +10,9 @@ The program runs a simulation of a series of bets that you can made, where you c
 
 ## How to run the Program?
 1. Clone the project
-2. Run the `main.py` file
+2. Install in your computer pandas by running the comand `pip install pandas`
+3. Install in your computer openpyxl by running the comand `pip install openpyxl`
+4. Run the `main.py` file
 
 
 ## Contribuciones
